@@ -13,15 +13,13 @@ public class SegmentNode
 	public PointNode getPoint1() { return _point1; }
 	public PointNode getPoint2() { return _point2; }
 	
-	public SegmentNode(PointNode pt1, PointNode pt2)
-	{
+	public SegmentNode(PointNode pt1, PointNode pt2) {
 		_point1 = pt1;
 		_point2 = pt2;
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		// TODO
 		return false;
 	}

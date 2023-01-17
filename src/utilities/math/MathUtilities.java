@@ -11,8 +11,7 @@ public class MathUtilities
     public static final double EPSILON_POWER = 6;
     public static final double EPSILON = Math.pow(10, -EPSILON_POWER); // 0.000001
 
-    public static boolean doubleEquals(double a, double b)
-    {
+    public static boolean doubleEquals(double a, double b) {
         return Math.abs(a - b) < EPSILON;
     }
     
@@ -24,8 +23,7 @@ public class MathUtilities
      * 
      * @param x
      */
-    public static double removeLessEpsilon(double x)
-    {
+    public static double removeLessEpsilon(double x) {
     	int value = (int)(x * Math.pow(10, EPSILON_POWER - 1));
     	return value / Math.pow(10, EPSILON_POWER - 1);
     }

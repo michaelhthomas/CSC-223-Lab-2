@@ -23,8 +23,7 @@ public class PointNode
 	 * @param x The X coordinate
 	 * @param y The Y coordinate
 	 */
-	public PointNode(double x, double y)
-	{
+	public PointNode(double x, double y) {
 		// TODO
 	}
 
@@ -34,27 +33,23 @@ public class PointNode
 	 * @param x -- The X coordinate
 	 * @param y -- The Y coordinate
 	 */
-	public PointNode(String name, double x, double y)
-	{
+	public PointNode(String name, double x, double y) {
 		// TODO
 	}
 
 	@Override
-	public int hashCode()
-	{
+	public int hashCode() {
 		return Double.valueOf(_x).hashCode() + Double.valueOf(_y).hashCode();
 	}
 
 	@Override
-	public boolean equals(Object obj)
-	{
+	public boolean equals(Object obj) {
 		// TODO
 		return false;
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		// TODO
 		return "";
 	}
