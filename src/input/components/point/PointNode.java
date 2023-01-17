@@ -49,11 +49,13 @@ public class PointNode
 	public boolean equals(Object obj)
 	{
 		// TODO
+		return false;
 	}
 
-    @Override
-    public String toString()
-    {
+	@Override
+	public String toString()
+	{
 		// TODO
+		return "";
 	}
 }

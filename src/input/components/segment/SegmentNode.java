@@ -23,5 +23,6 @@ public class SegmentNode
 	public boolean equals(Object obj)
 	{
 		// TODO
+		return false;
 	}
 }
