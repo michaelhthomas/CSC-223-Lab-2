@@ -55,7 +55,6 @@ public class PointNode
 	
 		PointNode other = (PointNode) obj;
 		return 
-			_name.equals(other._name) &&
 			MathUtilities.doubleEquals(_x, other._x) &&
 			MathUtilities.doubleEquals(_y, other._y);
 	}
