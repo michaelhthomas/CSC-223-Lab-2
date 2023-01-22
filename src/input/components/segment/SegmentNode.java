@@ -25,9 +25,7 @@ public class SegmentNode
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
+		if (obj == null || getClass() != obj.getClass())
 			return false;
 		SegmentNode other = (SegmentNode) obj;
 		return MathUtilities.doubleEquals(_point1.getX(), other._point1.getX()) &&
@@ -35,7 +33,10 @@ public class SegmentNode
 			   MathUtilities.doubleEquals(_point2.getX(), other._point2.getX()) &&
 			   MathUtilities.doubleEquals(_point2.getY(), other._point2.getY());
 	}
-
+	@Override
+	public String toString() {
+		return "SegmentNode ["+ _point1.toString() + ", " + _point2.toString() + "]";
+	}
 	
 	
 }
