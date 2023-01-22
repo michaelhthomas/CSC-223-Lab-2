@@ -61,6 +61,6 @@ public class PointNode
 
 	@Override
 	public String toString() {
-		return "Point " + _name + ": (" + _x + ", " + _y + ")";
+		return "Point " + _name + ": (" + MathUtilities.removeLessEpsilon(_x) + ", " + MathUtilities.removeLessEpsilon(_y) + ")";
 	}
 }
