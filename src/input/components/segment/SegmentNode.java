@@ -28,10 +28,8 @@ public class SegmentNode
 		if (obj == null || getClass() != obj.getClass())
 			return false;
 		SegmentNode other = (SegmentNode) obj;
-		return MathUtilities.doubleEquals(_point1.getX(), other._point1.getX()) &&
-			   MathUtilities.doubleEquals(_point1.getY(), other._point1.getY()) &&
-			   MathUtilities.doubleEquals(_point2.getX(), other._point2.getX()) &&
-			   MathUtilities.doubleEquals(_point2.getY(), other._point2.getY());
+		return (_point1.equals(other._point1)  && _point2.equals(other._point2)) ||
+			   (_point1.equals(other._point2)  && _point2.equals(other._point1));
 	}
 	@Override
 	public String toString() {
