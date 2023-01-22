@@ -38,7 +38,7 @@ public class SegmentNodeDatabase {
 	}
 	
 	/**
-	 * Adds a directed edge to the SegementNodeDatabase.
+	 * Adds a directed edge to the SegmentNodeDatabase.
 	 * @param point1
 	 * @param point2
 	 */
@@ -55,7 +55,7 @@ public class SegmentNodeDatabase {
 	}
 	
 	/**
-	 * Adds an undirected edge to the SegementNodeDatabase.
+	 * Adds an undirected edge to the SegmentNodeDatabase.
 	 * @param point1
 	 * @param point2
 	 */
