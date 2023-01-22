@@ -45,6 +45,7 @@ public class SegmentNodeDatabase {
 	public void addDirectedEdge(PointNode point1, PointNode point2) {
 		Set<PointNode> connectedPoints = _adjLists.get(point1);
 		if(connectedPoints == null) {
+			// creates adjacency list with one edge and adds to adjacency lists
 			LinkedHashSet<PointNode> newPoint = new LinkedHashSet<PointNode>();
 			newPoint.add(point2);
 			_adjLists.put(point1, newPoint);
@@ -81,6 +82,8 @@ public class SegmentNodeDatabase {
 	 */
 	public List<SegmentNode> asSegmentList() {
 		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
+		
+		// adds undirected edge to list of segment nodes
 		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
 			for(PointNode point : e.getValue()) {
 				segmentList.add(new SegmentNode(e.getKey(), point));
@@ -99,7 +102,7 @@ public class SegmentNodeDatabase {
 		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
 		SegmentNode segment;
 		
-		// 
+		// adds undirected edge to list of segment nodes if not already in it
 		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
 			for(PointNode point : e.getValue()) {
 				segment = new SegmentNode(e.getKey(), point);
