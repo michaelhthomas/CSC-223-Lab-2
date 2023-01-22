@@ -1,9 +1,6 @@
 package input.components.segment;
 
-import java.util.Objects;
-
 import input.components.point.PointNode;
-import utilities.math.MathUtilities;
 
 /**
  * A utility class only for representing ONE segment
@@ -20,7 +17,7 @@ public class SegmentNode
 		_point1 = pt1;
 		_point2 = pt2;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -31,10 +28,9 @@ public class SegmentNode
 		return (_point1.equals(other._point1)  && _point2.equals(other._point2)) ||
 			   (_point1.equals(other._point2)  && _point2.equals(other._point1));
 	}
+	
 	@Override
 	public String toString() {
 		return "SegmentNode ["+ _point1.toString() + ", " + _point2.toString() + "]";
 	}
-	
-	
 }
