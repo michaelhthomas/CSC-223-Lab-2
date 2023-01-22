@@ -24,7 +24,7 @@ public class PointNode
 	 * @param y The Y coordinate
 	 */
 	public PointNode(double x, double y) {
-		// TODO
+		this(ANONYMOUS, x, y);
 	}
 
 	/**
@@ -34,7 +34,9 @@ public class PointNode
 	 * @param y -- The Y coordinate
 	 */
 	public PointNode(String name, double x, double y) {
-		// TODO
+		_name = name;
+		_x = x;
+		_y = y;
 	}
 
 	@Override
@@ -44,13 +46,22 @@ public class PointNode
 
 	@Override
 	public boolean equals(Object obj) {
-		// TODO
-		return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+	
+		PointNode other = (PointNode) obj;
+		return 
+			_name.equals(other._name) &&
+			MathUtilities.doubleEquals(_x, other._x) &&
+			MathUtilities.doubleEquals(_y, other._y);
 	}
 
 	@Override
 	public String toString() {
-		// TODO
-		return "";
+		return "Point " + _name + ": (" + _x + ", " + _y + ")";
 	}
 }
