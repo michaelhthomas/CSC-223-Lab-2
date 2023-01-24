@@ -20,12 +20,12 @@ public class SegmentNodeDatabase {
 	public SegmentNodeDatabase() {
 		_adjLists = new HashMap<PointNode, Set<PointNode>>();
 	}
-	
+
 	/**
 	 * Constructs a new PointSegmentDatabase, using a new map of adjacency lists.
 	 * @param adjLists
 	 */
-	public void SegmntNodeDatabase(Map<PointNode, Set<PointNode>> adjLists) {
+	public SegmentNodeDatabase(Map<PointNode, Set<PointNode>> adjLists) {
 		_adjLists = adjLists;
 	}
 	
@@ -34,7 +34,8 @@ public class SegmentNodeDatabase {
 	 * @return number of undirected edges
 	 */
 	public int numUndirectedEdges() {
-		return _adjLists.size() / 2;
+		List<SegmentNode> segments = asUniqueSegmentList();
+		return segments.size();
 	}
 	
 	/**
@@ -81,15 +82,15 @@ public class SegmentNodeDatabase {
 	 * @return List of SegmentNodes
 	 */
 	public List<SegmentNode> asSegmentList() {
-		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
+		List<SegmentNode> segments = new ArrayList<SegmentNode>();
 		
 		// adds undirected edge to list of segment nodes
 		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
 			for(PointNode point : e.getValue()) {
-				segmentList.add(new SegmentNode(e.getKey(), point));
+				segments.add(new SegmentNode(e.getKey(), point));
 			}
 		}
-		return segmentList;
+		return segments;
 	}
 	
 	/**
@@ -99,19 +100,19 @@ public class SegmentNodeDatabase {
 	 */
 	public List<SegmentNode> asUniqueSegmentList() {
 		
-		List<SegmentNode> segmentList = new ArrayList<SegmentNode>();
+		List<SegmentNode> segments = new ArrayList<SegmentNode>();
 		SegmentNode segment;
 		
-		// adds undirected edge to list of segment nodes if not already in it
+		// adds undirected edges to list of segment nodes if not already in it
 		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
 			for(PointNode point : e.getValue()) {
 				segment = new SegmentNode(e.getKey(), point);
-				if(segmentList.contains(segment)) {
-					segmentList.add(segment);
+				if(!segments.contains(segment)) {
+					segments.add(segment);
 				}
 			}
 		}
-		return segmentList;
+		return segments;
 	}
 	
 }
