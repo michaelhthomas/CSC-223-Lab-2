@@ -29,7 +29,7 @@ public class SegmentNodeTest {
 	}
 	
 	@Test
-	void equalsNotEqual() {
+	void equalsNotEqualTest() {
 		SegmentNode segment1 = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		SegmentNode segment2 = new SegmentNode(new PointNode(2,2), new PointNode(3,3));
 		
@@ -37,7 +37,7 @@ public class SegmentNodeTest {
 	}
 	
 	@Test
-	void equalsSame() {
+	void equalsSameTest() {
 		SegmentNode segment1 = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		SegmentNode segment2 = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		
@@ -45,7 +45,7 @@ public class SegmentNodeTest {
 	}
 	
 	@Test
-	void equalsFlipped() {
+	void equalsFlippedTest() {
 		SegmentNode segment1 = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		SegmentNode segment2 = new SegmentNode(new PointNode(1,1), new PointNode(0,0));
 		
@@ -53,7 +53,7 @@ public class SegmentNodeTest {
 	}
 	
 	@Test
-	void equalsOtherType() {
+	void equalsOtherTypeTest() {
 		SegmentNode segment = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
@@ -61,17 +61,31 @@ public class SegmentNodeTest {
 	}
 	
 	@Test
-	void equalsSelf() {
+	void equalsSelfTest() {
 		SegmentNode segment = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		
 		assertEquals(true, segment.equals(segment));
 	}
 	
 	@Test
-	void equalsNull() {
+	void equalsNullTest() {
 		SegmentNode segment1 = new SegmentNode(new PointNode(0,0), new PointNode(1,1));
 		SegmentNode segment2 = null;
 		
 		assertEquals(false, segment1.equals(segment2));
+	}
+	
+	@Test
+	void toStringSimpleTest() {
+		SegmentNode segment = new SegmentNode(new PointNode("A",0,0), new PointNode("B",1,1));
+		
+		assertEquals("Segment [Point A: (0.0, 0.0), Point B: (1.0, 1.0)]", segment.toString());
+	}
+	
+	@Test
+	void toStringNullPointTest() {
+		SegmentNode segment = new SegmentNode(new PointNode("A",0,0), null);
+		
+		assertEquals("Segment [Point A: (0.0, 0.0), null]", segment.toString());
 	}
 }

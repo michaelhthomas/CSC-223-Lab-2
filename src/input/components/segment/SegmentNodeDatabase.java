@@ -34,7 +34,7 @@ public class SegmentNodeDatabase {
 	 * @return number of undirected edges
 	 */
 	public int numUndirectedEdges() {
-		return _adjLists.size();
+		return _adjLists.size() / 2;
 	}
 	
 	/**
@@ -42,7 +42,7 @@ public class SegmentNodeDatabase {
 	 * @param point1
 	 * @param point2
 	 */
-	public void addDirectedEdge(PointNode point1, PointNode point2) {
+	private void addDirectedEdge(PointNode point1, PointNode point2) {
 		Set<PointNode> connectedPoints = _adjLists.get(point1);
 		if(connectedPoints == null) {
 			// creates adjacency list with one edge and adds to adjacency lists

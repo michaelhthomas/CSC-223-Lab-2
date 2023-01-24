@@ -31,6 +31,6 @@ public class SegmentNode
 	
 	@Override
 	public String toString() {
-		return "SegmentNode ["+ _point1.toString() + ", " + _point2.toString() + "]";
+		return "Segment ["+ _point1 + ", " + _point2 + "]";
 	}
 }
