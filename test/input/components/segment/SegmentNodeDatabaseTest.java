@@ -52,9 +52,9 @@ class SegmentNodeDatabaseTest
     	//     / \
 		//	  /   v
     	//   B---->C
-    	PointNode a = new PointNode("A", 3, 6);
-    	PointNode b = new PointNode("B", 2, 4);
-    	PointNode c = new PointNode("C", 4, 4);
+    	PointNode a = new PointNode("A", 1, 1);
+    	PointNode b = new PointNode("B", 0, 0);
+    	PointNode c = new PointNode("C", 1, 0);
     	
     	Map<PointNode, Set<PointNode>> adjLists = new HashMap<PointNode, Set<PointNode>>();
     	LinkedHashSet<PointNode> aPoint = new LinkedHashSet<PointNode>();
@@ -81,6 +81,41 @@ class SegmentNodeDatabaseTest
     }
     
     @Test
+    void segmentNodeDatabaseUndirectedExistsTest() {
+    	SegmentNodeDatabase db = buildUndirected();
+    	
+    	assertNotNull(db);
+    }
+    
+    @Test
+	void numUndirectedEdgesTest() {
+		SegmentNodeDatabase db = build();
+		
+		assertEquals(10, db.numUndirectedEdges());
+	}
+	
+	@Test
+	void numUndirectedEdgesWithDirectedEdgeTest() {
+		SegmentNodeDatabase db = buildUndirected();
+		
+		assertEquals(1, db.numUndirectedEdges());
+	}
+	
+	void addDirectedEdgeHalfNonUniqueTest() {
+		SegmentNodeDatabase db = buildUndirected();
+		db.addUndirectedEdge(new PointNode("C", 6.0, 3.0), new PointNode("B", 0.0, 0.0));
+		
+		assertEquals(3, 3);
+	}
+	
+	@Test
+	void emptyNumUndirectedEdgesTest() {
+		SegmentNodeDatabase db = new SegmentNodeDatabase();
+		
+		assertEquals(0, db.numUndirectedEdges());
+	}
+    
+    @Test
     void asSegmentListTest() { 
     	SegmentNodeDatabase db = build();
     	List<SegmentNode> segments = db.asSegmentList();
@@ -91,12 +126,20 @@ class SegmentNodeDatabaseTest
     }
     
     @Test
+    void asSegmentListEmptyTest() { 
+    	SegmentNodeDatabase db = new SegmentNodeDatabase();
+    	List<SegmentNode> segments = db.asSegmentList();
+    	
+    	assertEquals(0, segments.size());
+    }
+    
+    @Test
     void asSegmentListUndirectedTest() { 
     	SegmentNodeDatabase db = buildUndirected();
     	List<SegmentNode> segments = db.asSegmentList();
     	
-    	assertEquals("Segment [Point A: (3.0, 6.0), Point B: (2.0, 4.0)]", segments.get(0).toString());
-    	assertEquals("Segment [Point B: (2.0, 4.0), Point A: (3.0, 6.0)]", segments.get(2).toString());
+    	assertEquals("Segment [Point A: (1.0, 1.0), Point B: (0.0, 0.0)]", segments.get(0).toString());
+    	assertEquals("Segment [Point B: (0.0, 0.0), Point A: (1.0, 1.0)]", segments.get(2).toString());
     	assertEquals(4, segments.size());
     }
     
@@ -120,37 +163,22 @@ class SegmentNodeDatabaseTest
     }
     
     @Test
+    void asUniqueSegmentListEmptyTest() { 
+    	SegmentNodeDatabase db = new SegmentNodeDatabase();
+    	List<SegmentNode> uniqueSegments = db.asSegmentList();
+    	
+    	assertEquals(0, uniqueSegments.size());
+    }
+    
+    @Test
     void asUniqueSegmentListUndirectedTest() { 
     	SegmentNodeDatabase db = buildUndirected();
     	List<SegmentNode> uniqueSegments = db.asUniqueSegmentList();
-    	for(SegmentNode s : uniqueSegments) {
-    		System.out.println(s);
-    	}
-    	assertEquals("Segment [Point A: (3.0, 6.0), Point B: (2.0, 4.0)]", uniqueSegments.get(0).toString());
-    	assertEquals("Segment [Point A: (3.0, 6.0), Point C: (4.0, 4.0)]", uniqueSegments.get(1).toString());
-    	assertEquals("Segment [Point B: (2.0, 4.0), Point C: (4.0, 4.0)]", uniqueSegments.get(2).toString());
+    	
+    	assertEquals("Segment [Point A: (1.0, 1.0), Point B: (0.0, 0.0)]", uniqueSegments.get(0).toString());
+    	assertEquals("Segment [Point A: (1.0, 1.0), Point C: (1.0, 0.0)]", uniqueSegments.get(1).toString());
+    	assertEquals("Segment [Point B: (0.0, 0.0), Point C: (1.0, 0.0)]", uniqueSegments.get(2).toString());
     	assertEquals(3, uniqueSegments.size());
     }
     
-	@Test
-	void numUndirectedEdgesTest() {
-		SegmentNodeDatabase db = build();
-		
-		assertEquals(10, db.numUndirectedEdges());
-	}
-	
-	@Test
-	void numUndirectedEdgesWithDirectedEdgeTest() {
-		SegmentNodeDatabase db = buildUndirected();
-
-		
-		assertEquals(3, db.numUndirectedEdges());
-	}
-	
-	@Test
-	void emptyNumUndirectedEdgesTest() {
-		SegmentNodeDatabase db = new SegmentNodeDatabase();
-		
-		assertEquals(0, db.numUndirectedEdges());
-	}
 }

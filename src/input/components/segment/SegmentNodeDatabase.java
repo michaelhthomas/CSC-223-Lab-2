@@ -30,12 +30,26 @@ public class SegmentNodeDatabase {
 	}
 	
 	/**
+	 * returns the number of edges in the SegmentNodeDatabase.
+	 * @return number of edges
+	 */
+	private int numEdges() {
+		int numberOfEdges = 0;
+		for(Entry<PointNode, Set<PointNode>> adjList : _adjLists.entrySet()) {
+			numberOfEdges += adjList.getValue().size();
+		}
+		return numberOfEdges;
+	}
+	
+	/**
 	 * returns the number of undirected edges in the SegmentNodeDatabase.
 	 * @return number of undirected edges
 	 */
 	public int numUndirectedEdges() {
-		List<SegmentNode> segments = asUniqueSegmentList();
-		return segments.size();
+		List<SegmentNode> uniqueEdges = asUniqueSegmentList();
+		int numberOfEdges = 0;
+		numberOfEdges = numEdges();
+		return numberOfEdges - uniqueEdges.size();
 	}
 	
 	/**
