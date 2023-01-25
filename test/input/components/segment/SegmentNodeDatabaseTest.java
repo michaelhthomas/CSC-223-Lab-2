@@ -2,6 +2,7 @@ package input.components.segment;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -47,11 +48,11 @@ class SegmentNodeDatabaseTest
     	return db;
     }
     
-    private SegmentNodeDatabase buildUndirected() {
+    private SegmentNodeDatabase buildDirected() {
 		//      A
-    	//     / \
-		//	  /   v
-    	//   B---->C
+    	//     /|
+		//	  / v
+    	//   B->C
     	PointNode a = new PointNode("A", 1, 1);
     	PointNode b = new PointNode("B", 0, 0);
     	PointNode c = new PointNode("C", 1, 0);
@@ -73,6 +74,8 @@ class SegmentNodeDatabaseTest
     	return db;
 	}
 
+    // Constructors
+    
     @Test
     void segmentNodeDatabaseExistsTest() {
     	SegmentNodeDatabase db = build();
@@ -82,10 +85,12 @@ class SegmentNodeDatabaseTest
     
     @Test
     void segmentNodeDatabaseUndirectedExistsTest() {
-    	SegmentNodeDatabase db = buildUndirected();
+    	SegmentNodeDatabase db = buildDirected();
     	
     	assertNotNull(db);
     }
+    
+    // numUndirectedEdges
     
     @Test
 	void numUndirectedEdgesTest() {
@@ -96,25 +101,105 @@ class SegmentNodeDatabaseTest
 	
 	@Test
 	void numUndirectedEdgesWithDirectedEdgeTest() {
-		SegmentNodeDatabase db = buildUndirected();
+		SegmentNodeDatabase db = buildDirected();
 		
 		assertEquals(1, db.numUndirectedEdges());
 	}
 	
-	void addDirectedEdgeHalfNonUniqueTest() {
-		SegmentNodeDatabase db = buildUndirected();
-		db.addUndirectedEdge(new PointNode("C", 6.0, 3.0), new PointNode("B", 0.0, 0.0));
-		
-		assertEquals(3, 3);
-	}
-	
 	@Test
-	void emptyNumUndirectedEdgesTest() {
+	void numUndirectedEdgesEmptyTest() {
 		SegmentNodeDatabase db = new SegmentNodeDatabase();
 		
 		assertEquals(0, db.numUndirectedEdges());
 	}
+	
+	// addDirectedEdge
+	
+	@Test
+	void addDirectedEdgeTest() {
+		SegmentNodeDatabase db = buildDirected();
+		db.addUndirectedEdge(new PointNode("C", 0.0, 1.0), new PointNode("D", 0.0, 2.0));
+		
+		assertEquals(4, db.asUniqueSegmentList().size());
+	}
+	
+	@Test
+	void addDirectedEdgeRepeatTest() {
+		SegmentNodeDatabase db = buildDirected();
+		db.addUndirectedEdge(new PointNode("D", 0.0, 2.0), new PointNode("E", 1.0, 2.0));
+		
+		assertEquals(4, db.asUniqueSegmentList().size());
+	}
+	
+	@Test
+	void addDirectedEdgeTurnUndirectedToDirectedTest() {
+		SegmentNodeDatabase db = buildDirected();
+		db.addUndirectedEdge(new PointNode("C", 1.0, 0.0), new PointNode("B", 0.0, 0.0));
+		List<SegmentNode> segments = db.asSegmentList();
+		
+		assertEquals("Segment [Point C: (1.0, 0.0), Point B: (0.0, 0.0)]", segments.get(4).toString());
+		assertEquals(5, segments.size());
+		assertEquals(2, db.numUndirectedEdges());
+	}
     
+	// addAdjacencyList
+	
+	@Test
+	void addAdjacencyListTest() {
+		//      A
+    	//     /|
+		//	  / v
+    	//   B->C
+		SegmentNodeDatabase db1 = new SegmentNodeDatabase();
+		SegmentNodeDatabase db2 = buildDirected();
+    	PointNode a = new PointNode("A", 1, 1);
+    	PointNode b = new PointNode("B", 0, 0);
+    	PointNode c = new PointNode("C", 1, 0);
+    	List<PointNode> aPoint = new ArrayList<PointNode>();
+    	List<PointNode> bPoint = new ArrayList<PointNode>();
+    	List<PointNode> cPoint = new ArrayList<PointNode>();
+    	aPoint.add(b);
+    	aPoint.add(c);
+    	bPoint.add(a);
+    	bPoint.add(c);
+    	db1.addAdjacencyList(a, aPoint);
+    	db1.addAdjacencyList(b, bPoint);
+    	db1.addAdjacencyList(c, cPoint);
+    	List<SegmentNode> uniqueSegments1 = db1.asUniqueSegmentList();
+    	List<SegmentNode> uniqueSegments2 = db2.asUniqueSegmentList();
+    	
+    	for(SegmentNode segment : uniqueSegments1) {
+    		assertTrue(uniqueSegments2.contains(segment));
+    	}
+	}
+	
+	@Test
+	void addAdjacencyListRepeatTest() {
+		SegmentNodeDatabase db = buildDirected();
+    	PointNode a = new PointNode("A", 1, 1);
+    	PointNode b = new PointNode("B", 0, 0);
+    	List<PointNode> aPoint = new ArrayList<PointNode>();
+    	aPoint.add(b);
+    	db.addAdjacencyList(a, aPoint);
+    	
+    	assertEquals(4, db.asSegmentList().size());
+	}
+	
+	@Test
+	void addAdjacencyListRepeatReverse() {
+		SegmentNodeDatabase db = buildDirected();
+    	PointNode b = new PointNode("B", 0, 0);
+    	PointNode c = new PointNode("C", 1, 0);
+    	List<PointNode> bPoint = new ArrayList<PointNode>();
+    	bPoint.add(c);
+    	db.addAdjacencyList(b, bPoint);
+    	
+    	assertEquals(5, db.asSegmentList().size());
+    	assertEquals(2, db.numUndirectedEdges());
+	}
+	
+	// asSegmentList
+	
     @Test
     void asSegmentListTest() { 
     	SegmentNodeDatabase db = build();
@@ -135,7 +220,7 @@ class SegmentNodeDatabaseTest
     
     @Test
     void asSegmentListUndirectedTest() { 
-    	SegmentNodeDatabase db = buildUndirected();
+    	SegmentNodeDatabase db = buildDirected();
     	List<SegmentNode> segments = db.asSegmentList();
     	
     	assertEquals("Segment [Point A: (1.0, 1.0), Point B: (0.0, 0.0)]", segments.get(0).toString());
@@ -143,11 +228,14 @@ class SegmentNodeDatabaseTest
     	assertEquals(4, segments.size());
     }
     
+    // asUniqueSegmentList
+    
     @Test
     void asUniqueSegmentListTest() { 
     	SegmentNodeDatabase db = build();
     	List<SegmentNode> uniqueSegments = db.asUniqueSegmentList();
     	
+    	// ensures there are no repeated segments
     	assertEquals("Segment [Point A: (3.0, 6.0), Point B: (2.0, 4.0)]", uniqueSegments.get(0).toString());
     	assertEquals("Segment [Point A: (3.0, 6.0), Point C: (4.0, 4.0)]", uniqueSegments.get(1).toString());
     	assertEquals("Segment [Point B: (2.0, 4.0), Point C: (4.0, 4.0)]", uniqueSegments.get(2).toString());
@@ -172,9 +260,10 @@ class SegmentNodeDatabaseTest
     
     @Test
     void asUniqueSegmentListUndirectedTest() { 
-    	SegmentNodeDatabase db = buildUndirected();
+    	SegmentNodeDatabase db = buildDirected();
     	List<SegmentNode> uniqueSegments = db.asUniqueSegmentList();
     	
+    	// ensures there are no repeated segments
     	assertEquals("Segment [Point A: (1.0, 1.0), Point B: (0.0, 0.0)]", uniqueSegments.get(0).toString());
     	assertEquals("Segment [Point A: (1.0, 1.0), Point C: (1.0, 0.0)]", uniqueSegments.get(1).toString());
     	assertEquals("Segment [Point B: (0.0, 0.0), Point C: (1.0, 0.0)]", uniqueSegments.get(2).toString());

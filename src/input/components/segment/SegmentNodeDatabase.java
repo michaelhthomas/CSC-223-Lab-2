@@ -30,26 +30,25 @@ public class SegmentNodeDatabase {
 	}
 	
 	/**
-	 * returns the number of edges in the SegmentNodeDatabase.
-	 * @return number of edges
-	 */
-	private int numEdges() {
-		int numberOfEdges = 0;
-		for(Entry<PointNode, Set<PointNode>> adjList : _adjLists.entrySet()) {
-			numberOfEdges += adjList.getValue().size();
-		}
-		return numberOfEdges;
-	}
-	
-	/**
 	 * returns the number of undirected edges in the SegmentNodeDatabase.
 	 * @return number of undirected edges
 	 */
 	public int numUndirectedEdges() {
-		List<SegmentNode> uniqueEdges = asUniqueSegmentList();
-		int numberOfEdges = 0;
-		numberOfEdges = numEdges();
-		return numberOfEdges - uniqueEdges.size();
+		int numOfUndirectedEdges = 0;
+		List<SegmentNode> segments = new ArrayList<SegmentNode>();
+		SegmentNode segment;
+		
+		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
+			for(PointNode point : entry.getValue()) {
+				segment = new SegmentNode(entry.getKey(), point);
+				if(!segments.contains(segment)) {
+					segments.add(segment);
+					numOfUndirectedEdges--;
+				}
+				numOfUndirectedEdges++;
+			}
+		}
+		return numOfUndirectedEdges;
 	}
 	
 	/**
@@ -99,9 +98,9 @@ public class SegmentNodeDatabase {
 		List<SegmentNode> segments = new ArrayList<SegmentNode>();
 		
 		// adds undirected edge to list of segment nodes
-		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
-			for(PointNode point : e.getValue()) {
-				segments.add(new SegmentNode(e.getKey(), point));
+		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
+			for(PointNode point : entry.getValue()) {
+				segments.add(new SegmentNode(entry.getKey(), point));
 			}
 		}
 		return segments;
@@ -118,9 +117,9 @@ public class SegmentNodeDatabase {
 		SegmentNode segment;
 		
 		// adds undirected edges to list of segment nodes if not already in it
-		for(Entry<PointNode, Set<PointNode>> e : _adjLists.entrySet()) {
-			for(PointNode point : e.getValue()) {
-				segment = new SegmentNode(e.getKey(), point);
+		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
+			for(PointNode point : entry.getValue()) {
+				segment = new SegmentNode(entry.getKey(), point);
 				if(!segments.contains(segment)) {
 					segments.add(segment);
 				}
