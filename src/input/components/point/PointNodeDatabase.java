@@ -1,9 +1,17 @@
+
+
 package input.components.point;
 
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * A database of 2D points
+ *
+ * @author Michael Thomas, Jake Shore
+ * @date 1/26/2022
+ */
 public class PointNodeDatabase {
 
 	Set<PointNode> _points;

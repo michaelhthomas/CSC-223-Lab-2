@@ -10,6 +10,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+/**
+ * A database of undirected and directed edges stored as adjacency lists.
+ *
+ * @author Michael Thomas, Jake Shore
+ * @date 1/26/2022
+ */
 public class SegmentNodeDatabase {
 
 	Map<PointNode, Set<PointNode>> _adjLists;
