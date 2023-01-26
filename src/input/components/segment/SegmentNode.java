@@ -3,7 +3,7 @@ package input.components.segment;
 import input.components.point.PointNode;
 
 /**
- * A 2D line segment (x1, y1), (x2, y2)
+ * A 2D line segment
  * <p>The order of the points does not matter.
  *
  * @author Michael Thomas, Jake Shore
