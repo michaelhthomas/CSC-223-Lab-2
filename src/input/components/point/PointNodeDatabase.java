@@ -78,10 +78,7 @@ public class PointNodeDatabase {
 	 * @return the name of the given point if it is present in the database, else null.
 	 */
 	public String getName(double x, double y) {
-		PointNode found = getPoint(x, y);
-		if (found == null)
-			return null;
-		return found._name;
+		return getName(new PointNode(x, y));
 	}
 	
 	/**
