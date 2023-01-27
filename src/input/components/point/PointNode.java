@@ -61,6 +61,9 @@ public class PointNode
 
 	@Override
 	public String toString() {
-		return "Point " + _name + ": (" + MathUtilities.removeLessEpsilon(_x) + ", " + MathUtilities.removeLessEpsilon(_y) + ")";
+		String point = "(" + MathUtilities.removeLessEpsilon(_x) + ", " + MathUtilities.removeLessEpsilon(_y) + ")";
+		if (_name != null && !_name.equals(ANONYMOUS))
+			return _name + point;
+		return point;
 	}
 }
