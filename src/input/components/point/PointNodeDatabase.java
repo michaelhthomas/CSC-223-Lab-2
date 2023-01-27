@@ -67,9 +67,7 @@ public class PointNodeDatabase {
 	 */
 	public String getName(PointNode point) {
 		PointNode found = getPoint(point);
-		if (found == null)
-			return null;
-		return found._name;
+		return found != null ? found._name : null;
 	}
 	
 	/**

@@ -33,7 +33,7 @@ public class SegmentNodeDatabase {
 	 * @param adjLists Map of adjacency lists
 	 */
 	public SegmentNodeDatabase(Map<PointNode, Set<PointNode>> adjLists) {
-		_adjLists = adjLists;
+		_adjLists = new HashMap<PointNode, Set<PointNode>>(adjLists);
 	}
 	
 	/**

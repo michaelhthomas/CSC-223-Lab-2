@@ -41,7 +41,7 @@ public class SegmentNode
 			return false;
 		SegmentNode other = (SegmentNode) obj;
 		return (_point1.equals(other._point1)  && _point2.equals(other._point2)) ||
-			   (_point1.equals(other._point2)  && _point2.equals(other._point1));
+					 (_point1.equals(other._point2)  && _point2.equals(other._point1));
 	}
 	
 	@Override
