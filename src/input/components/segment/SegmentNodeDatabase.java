@@ -123,12 +123,10 @@ public class SegmentNodeDatabase {
 	public List<SegmentNode> asUniqueSegmentList() {
 		
 		List<SegmentNode> segments = new ArrayList<SegmentNode>();
-		SegmentNode segment;
-		
 		// adds undirected edges to list of segment nodes if not already in it
 		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
 			for(PointNode point : entry.getValue()) {
-				segment = new SegmentNode(entry.getKey(), point);
+				SegmentNode segment = new SegmentNode(entry.getKey(), point);
 				if(!segments.contains(segment)) {
 					segments.add(segment);
 				}
