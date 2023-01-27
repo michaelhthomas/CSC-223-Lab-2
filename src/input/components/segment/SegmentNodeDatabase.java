@@ -72,6 +72,7 @@ public class SegmentNodeDatabase {
 			_adjLists.put(point1, newPoint);
 		}
 		else {
+			// adds to pre-existing adjacency list
 			connectedPoints.add(point2);
 		}
 	}
@@ -116,7 +117,7 @@ public class SegmentNodeDatabase {
 	/**
 	 * returns a list of segmentNodes from the SegmentNodeDatabase only
 	 * counting each undirected edge once.
-	 * @return
+	 * @return List of unique SegmentNodes
 	 */
 	public List<SegmentNode> asUniqueSegmentList() {
 		
