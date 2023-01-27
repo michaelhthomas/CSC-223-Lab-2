@@ -19,8 +19,8 @@ public class SegmentNode
 	
 	/**
 	 * Create a new Segment with the specified points.
-	 * @param pount 1
-	 * @param pount 2
+	 * @param point 1
+	 * @param point 2
 	 */
 	public SegmentNode(PointNode pt1, PointNode pt2) {
 		_point1 = pt1;
