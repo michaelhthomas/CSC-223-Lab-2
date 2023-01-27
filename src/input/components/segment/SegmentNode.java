@@ -3,7 +3,11 @@ package input.components.segment;
 import input.components.point.PointNode;
 
 /**
- * A utility class only for representing ONE segment
+ * A 2D line segment
+ * <p>The order of the points does not matter.
+ *
+ * @author Michael Thomas, Jake Shore
+ * @date 1/26/2022
  */
 public class SegmentNode
 {
@@ -13,11 +17,16 @@ public class SegmentNode
 	public PointNode getPoint1() { return _point1; }
 	public PointNode getPoint2() { return _point2; }
 	
+	/**
+	 * Create a new Segment with the specified points.
+	 * @param point 1
+	 * @param point 2
+	 */
 	public SegmentNode(PointNode pt1, PointNode pt2) {
 		_point1 = pt1;
 		_point2 = pt2;
 	}
-
+	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

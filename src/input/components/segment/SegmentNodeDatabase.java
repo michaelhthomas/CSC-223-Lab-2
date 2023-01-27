@@ -10,6 +10,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+/**
+ * A database of undirected and directed edges stored as adjacency lists.
+ *
+ * @author Michael Thomas, Jake Shore
+ * @date 1/26/2022
+ */
 public class SegmentNodeDatabase {
 
 	Map<PointNode, Set<PointNode>> _adjLists;
@@ -38,6 +44,7 @@ public class SegmentNodeDatabase {
 		List<SegmentNode> segments = new ArrayList<SegmentNode>();
 		SegmentNode segment;
 		
+		// adds up all nonunique edges and subtracts all unique edges
 		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
 			for(PointNode point : entry.getValue()) {
 				segment = new SegmentNode(entry.getKey(), point);
@@ -65,6 +72,7 @@ public class SegmentNodeDatabase {
 			_adjLists.put(point1, newPoint);
 		}
 		else {
+			// adds to pre-existing adjacency list
 			connectedPoints.add(point2);
 		}
 	}
@@ -109,7 +117,7 @@ public class SegmentNodeDatabase {
 	/**
 	 * returns a list of segmentNodes from the SegmentNodeDatabase only
 	 * counting each undirected edge once.
-	 * @return
+	 * @return List of unique SegmentNodes
 	 */
 	public List<SegmentNode> asUniqueSegmentList() {
 		

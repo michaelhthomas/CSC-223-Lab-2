@@ -53,18 +53,22 @@ class SegmentNodeDatabaseTest
     	//     /|
 		//	  / v
     	//   B->C
+    	//
     	PointNode a = new PointNode("A", 1, 1);
     	PointNode b = new PointNode("B", 0, 0);
     	PointNode c = new PointNode("C", 1, 0);
     	
     	Map<PointNode, Set<PointNode>> adjLists = new HashMap<PointNode, Set<PointNode>>();
+    	
     	LinkedHashSet<PointNode> aPoint = new LinkedHashSet<PointNode>();
     	LinkedHashSet<PointNode> bPoint = new LinkedHashSet<PointNode>();
     	LinkedHashSet<PointNode> cPoint = new LinkedHashSet<PointNode>();
+    	
     	aPoint.add(b);
     	aPoint.add(c);
     	bPoint.add(a);
     	bPoint.add(c);
+    	
     	adjLists.put(a, aPoint);
     	adjLists.put(b, bPoint);
     	adjLists.put(c, cPoint);
@@ -186,7 +190,7 @@ class SegmentNodeDatabaseTest
 	}
 	
 	@Test
-	void addAdjacencyListRepeatReverse() {
+	void addAdjacencyListReverseTest() {
 		SegmentNodeDatabase db = buildDirected();
     	PointNode b = new PointNode("B", 0, 0);
     	PointNode c = new PointNode("C", 1, 0);
