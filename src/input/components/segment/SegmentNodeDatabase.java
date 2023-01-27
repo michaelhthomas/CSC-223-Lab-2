@@ -30,14 +30,14 @@ public class SegmentNodeDatabase {
 
 	/**
 	 * Constructs a new PointSegmentDatabase, using a new map of adjacency lists.
-	 * @param adjLists
+	 * @param adjLists Map of adjacency lists
 	 */
 	public SegmentNodeDatabase(Map<PointNode, Set<PointNode>> adjLists) {
 		_adjLists = adjLists;
 	}
 	
 	/**
-	 * returns the number of undirected edges in the SegmentNodeDatabase.
+	 * Calculates the number of undirected edges in the SegmentNodeDatabase.
 	 * @return number of undirected edges
 	 */
 	public int numUndirectedEdges() {
