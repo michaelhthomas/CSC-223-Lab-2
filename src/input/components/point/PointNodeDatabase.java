@@ -9,7 +9,8 @@ import java.util.Set;
 /**
  * A database of 2D points
  *
- * @author Michael Thomas, Jake Shore
+ * @author Michael Thomas
+ * @author Jake Shore
  * @date 1/26/2022
  */
 public class PointNodeDatabase {

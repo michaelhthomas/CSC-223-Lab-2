@@ -5,7 +5,8 @@ import utilities.math.MathUtilities;
 /**
  * A 2D Point (x, y).
  *
- * @author Michael Thomas, Jake Shore
+ * @author Michael Thomas
+ * @author Jake Shore
  * @date 1/26/2022
  */
 public class PointNode

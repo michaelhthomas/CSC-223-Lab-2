@@ -6,7 +6,8 @@ import input.components.point.PointNode;
  * A 2D line segment
  * <p>The order of the points does not matter.
  *
- * @author Michael Thomas, Jake Shore
+ * @author Michael Thomas
+ * @author Jake Shore
  * @date 1/26/2022
  */
 public class SegmentNode
