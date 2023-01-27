@@ -42,18 +42,16 @@ public class SegmentNodeDatabase {
 	 */
 	public int numUndirectedEdges() {
 		int numOfUndirectedEdges = 0;
-		List<SegmentNode> segments = new ArrayList<SegmentNode>();
-		SegmentNode segment;
+		Set<SegmentNode> segments = new LinkedHashSet<SegmentNode>();
 		
-		// adds up all nonunique edges and subtracts all unique edges
+		// counts the number of unique edges
 		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
 			for(PointNode point : entry.getValue()) {
-				segment = new SegmentNode(entry.getKey(), point);
-				if(!segments.contains(segment)) {
-					segments.add(segment);
-					numOfUndirectedEdges--;
+				SegmentNode segment = new SegmentNode(entry.getKey(), point);
+				boolean added = segments.add(segment);
+				if(!added) {
+					numOfUndirectedEdges++;
 				}
-				numOfUndirectedEdges++;
 			}
 		}
 		return numOfUndirectedEdges;

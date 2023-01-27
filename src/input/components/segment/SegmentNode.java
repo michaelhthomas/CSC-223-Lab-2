@@ -27,6 +27,11 @@ public class SegmentNode
 		_point1 = pt1;
 		_point2 = pt2;
 	}
+
+	@Override
+	public int hashCode() {
+		return _point1.hashCode() + _point2.hashCode();
+	}
 	
 	@Override
 	public boolean equals(Object obj) {
