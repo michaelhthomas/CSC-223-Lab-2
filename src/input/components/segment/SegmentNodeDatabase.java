@@ -44,6 +44,7 @@ public class SegmentNodeDatabase {
 		List<SegmentNode> segments = new ArrayList<SegmentNode>();
 		SegmentNode segment;
 		
+		// adds up all nonunique edges and subtracts all unique edges
 		for(Entry<PointNode, Set<PointNode>> entry : _adjLists.entrySet()) {
 			for(PointNode point : entry.getValue()) {
 				segment = new SegmentNode(entry.getKey(), point);
