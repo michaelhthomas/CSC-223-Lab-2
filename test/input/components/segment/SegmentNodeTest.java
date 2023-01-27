@@ -79,13 +79,13 @@ public class SegmentNodeTest {
 	void toStringSimpleTest() {
 		SegmentNode segment = new SegmentNode(new PointNode("A",0,0), new PointNode("B",1,1));
 		
-		assertEquals("Segment [Point A: (0.0, 0.0), Point B: (1.0, 1.0)]", segment.toString());
+		assertEquals("Segment [A(0.0, 0.0), B(1.0, 1.0)]", segment.toString());
 	}
 	
 	@Test
 	void toStringNullPointTest() {
 		SegmentNode segment = new SegmentNode(new PointNode("A",0,0), null);
 		
-		assertEquals("Segment [Point A: (0.0, 0.0), null]", segment.toString());
+		assertEquals("Segment [A(0.0, 0.0), null]", segment.toString());
 	}
 }

@@ -113,13 +113,13 @@ public class PointNodeTest {
   void pointNodeToStringNoNameTest() {
     PointNode test = new PointNode(5, 8);
 
-    assertEquals("Point " + PointNode.ANONYMOUS + ": (5.0, 8.0)", test.toString());
+    assertEquals("(5.0, 8.0)", test.toString());
   }
 
   @Test
   void pointNodeToStringWithNameTest() {
     PointNode test = new PointNode("A", 5, 8);
 
-    assertEquals("Point A: (5.0, 8.0)", test.toString());
+    assertEquals("A(5.0, 8.0)", test.toString());
   }
 }
